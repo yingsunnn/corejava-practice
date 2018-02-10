@@ -6,6 +6,8 @@ public interface MyInterface1 {
     };
 
     static void staticMethod1() {
-
+        System.out.println("My interface 1 static method 1");
     }
+
+
 }
