@@ -2,6 +2,7 @@ package com.ying.lambda.stream;
 
 import java.util.*;
 import java.util.function.Consumer;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -11,6 +12,7 @@ public class SteamTest {
         SteamTest steamTest = new SteamTest();
 //        steamTest.terminalMethod();
         steamTest.collectMethod();
+
     }
 
     public void terminalMethod () {
@@ -39,6 +41,12 @@ public class SteamTest {
         System.out.println(Stream.of("c", "C").allMatch(string -> string.toLowerCase().equals("c")));
 
         System.out.println(Stream.of("a", "b", "c", "d").noneMatch(string -> string.toLowerCase().equals("e")));
+
+        Stream.of("Eric,Peter", "Evans,Brown,Johnson", "Anna")
+                .flatMap(string -> Arrays.stream(string.split(",")))
+                .forEach(System.out::println);
+
+        System.out.println(Stream.of("Eric", "Peter", "Evans", "Brown", "Johnson").reduce("", String::concat));
     }
 
     public void collectMethod () {
@@ -59,7 +67,13 @@ public class SteamTest {
         Map<String, Car> carMap = cars.stream().collect(Collectors.toMap(car -> car.getName(), car -> car));
         System.out.println(carMap);
 
+
+        cars.stream()
+                .reduce((car1, car2) -> car1.getMilage() > car2.getMilage() ? car1 : car2)
+                .ifPresent(System.out::println);
+
     }
+
 
     public static CarDTO entityToDTO (Car car) {
         return new CarDTO(car.getName() + " DTO");
