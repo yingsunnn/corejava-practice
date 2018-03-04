@@ -14,7 +14,13 @@ public class MultithreadingTest {
             System.out.println("First task started");
         });
         t1.start();
+
+        System.out.println("id: " + t1.getId());
+        t1.setName("thread 1");
+        System.out.println("name: " + t1.getName());
         t1.join();
         System.out.println("main thread");
+
+        System.out.println("alive: " + t1.isAlive());
     }
 }
