@@ -10,7 +10,19 @@ public class Steps {
     public static void main(String[] args) {
         Steps steps = new Steps();
 
-        System.out.println(steps.getWays());
+//        System.out.println(steps.getWays());
+        System.out.println(steps.getWays2(10));
+    }
+
+    public int getWays2 (int stairs) {
+        if (stairs == 0) {
+            return 1;
+        }
+        if (stairs < 0) {
+            return 0;
+        }
+
+        return getWays2( stairs - 1) + getWays2(stairs - 2) + getWays2(stairs - 3);
     }
 
     public List<Long> getWays () {
